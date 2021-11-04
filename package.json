@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "grid3_client": "^0.0.10",
+    "ts-rmb-http-client": "^0.1.9",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
