@@ -1,5 +1,15 @@
 <template>
   <div id="app">
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+    <tf-vm></tf-vm>
+
     <tf-kubernetes></tf-kubernetes>
 
     <!-- <div id="nav">
