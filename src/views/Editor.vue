@@ -1,12 +1,12 @@
 <template>
   <div>
-    editor works!
-
-    <tf-kubernetes></tf-kubernetes>
+    <div id="test"></div>
 
     <script
+      v-for="el in elements"
+      :key="el"
       type="application/javascript"
-      src="/build/elements/kubernetes.wc.js"
+      :src="`/build/elements/${el}.wc.js`"
       defer
     ></script>
   </div>
@@ -18,5 +18,11 @@ import { Component, Vue } from "vue-property-decorator";
 @Component({
   name: "Editor",
 })
-export default class Editor extends Vue {}
+export default class Editor extends Vue {
+  elements = ["kubernetes", "vm"];
+
+  created() {
+    console.log(this.elements);
+  }
+}
 </script>
