@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npm run build:app && npm run build:wc",
+    "build": "npm run build:wc && npm run build:app",
     "build:app": "vue-cli-service build",
-    "build:wc": "node ./scripts/build.js",
+    "build:wc": "cd elements-builder && npm run build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
