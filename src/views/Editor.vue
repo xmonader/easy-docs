@@ -11,7 +11,7 @@
       v-for="el in elements"
       :key="el"
       type="application/javascript"
-      :src="`/easy-docs/build/elements/${el}.wc.js`"
+      :src="`/build/elements/${el}.wc.js`"
       defer
     ></script>
   </div>
