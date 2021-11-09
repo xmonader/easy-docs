@@ -1,37 +1,37 @@
 <template>
   <nav class="sidenav">
     <aside class="menu">
-      <p class="menu-label">General</p>
-      <ul class="menu-list">
-        <li><a @click="$router.push('/dashboard')">Dashboard</a></li>
-        <li><a @click="$router.push('/customers')">Customers</a></li>
-      </ul>
-      <p class="menu-label">Administration</p>
-      <ul class="menu-list">
-        <li><a>Team Settings</a></li>
-        <li>
-          <a class="is-active">Manage Your Team</a>
-          <ul>
-            <li><a>Members</a></li>
-            <li><a>Plugins</a></li>
-            <li><a>Add a member</a></li>
-          </ul>
-        </li>
-        <li><a>Invitations</a></li>
-        <li><a>Cloud Storage Environment Settings</a></li>
-        <li><a>Authentication</a></li>
-      </ul>
-      <p class="menu-label">Transactions</p>
-      <ul class="menu-list">
-        <li><a>Payments</a></li>
-        <li><a>Transfers</a></li>
-        <li><a>Balance</a></li>
-      </ul>
+      <template v-for="route in routes">
+        <p :key="route.label" class="menu-label">
+          {{ route.label }}
+        </p>
+
+        <SidenavRoute
+          :key="route.label + '/children'"
+          :activeRoute="activeRoute"
+          :routes="route.children"
+        />
+      </template>
     </aside>
   </nav>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { ISidenav } from "@/types/Sidenav";
+import SidenavRoute from "@/components/SidenavRoute.vue";
+
+@Component({
+  name: "Sidenav",
+  components: {
+    SidenavRoute,
+  },
+})
+export default class Sidenav extends Vue {
+  @Prop({ required: true }) routes!: ISidenav;
+  @Prop({ required: true }) activeRoute!: string;
+}
+</script>
 
 <style lang="scss" scoped>
 .sidenav {

@@ -8,16 +8,22 @@
       defer
     ></script>
 
-    <section class="app-container">
-      <Sidenav />
+    <section class="app-container" v-if="sidenav">
+      <Sidenav :routes="sidenav" :activeRoute="$store.getters.activeRoute" />
       <router-view />
     </section>
+
+    <p v-if="!sidenav">Loading...</p>
   </main>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import Sidenav from "@/components/Sidenav.vue";
+import api from "@/utils/api";
+import { ISidenav } from "@/types/Sidenav";
+import { Route } from "vue-router";
+import { findInitialPage } from "@/utils/sidenav";
 
 @Component({
   name: "App",
@@ -27,6 +33,27 @@ import Sidenav from "@/components/Sidenav.vue";
 })
 export default class App extends Vue {
   elements = ["kubernetes", "vm", "deployedlist", "caprover"];
+  sidenav: ISidenav | null = null;
+
+  created() {
+    api
+      .get<ISidenav>("/sidenav.json")
+      .then((r) => (this.sidenav = r.data))
+      .catch(console.log);
+  }
+
+  @Watch("$route", { immediate: true, deep: true })
+  onRouteChange(route: Route) {
+    if (this.sidenav) {
+      this.$store.dispatch("setActiveRoute", route.path);
+      this.$store.dispatch(
+        "setActivePage",
+        findInitialPage(this.sidenav as any, route.path)
+      );
+    }
+
+    /* Load new page */
+  }
 }
 </script>
 

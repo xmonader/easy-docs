@@ -1,20 +1,16 @@
 <template>
-  <section class="viewer">works - {{ $store.getters.activeRoute }}</section>
+  <section class="viewer">
+    works - {{ $store.getters.activeRoute }} - {{ $store.getters.activePage }}
+  </section>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
-import { Route } from "vue-router";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
   name: "MDViewer",
 })
-export default class MDViewer extends Vue {
-  @Watch("$route", { immediate: true, deep: true })
-  onRouteChange(route: Route) {
-    this.$store.dispatch("setActiveRoute", route.path);
-  }
-}
+export default class MDViewer extends Vue {}
 </script>
 
 <style lang="scss" scoped>
