@@ -5,9 +5,14 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/editor",
+    path: "/debug/editor",
     name: "editor",
     component: () => import("../views/Editor.vue"),
+  },
+  {
+    path: "*",
+    name: "mdviewer",
+    component: () => import("../views/MDViewer.vue"),
   },
 ];
 

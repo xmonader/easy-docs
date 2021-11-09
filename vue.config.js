@@ -5,5 +5,5 @@ module.exports = {
       'vuetify'
     ],
     outputDir: join(__dirname, 'docs'),
-    publicPath: process.env.NODE_ENV === 'production' ? '/easy-docs/' : undefined
+    publicPath: '/easy-docs/'
 }

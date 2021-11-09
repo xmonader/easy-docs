@@ -6,14 +6,6 @@
       </div>
       <div class="editor__preview" v-html="html"></div>
     </div>
-
-    <script
-      v-for="el in elements"
-      :key="el"
-      type="application/javascript"
-      :src="`/build/elements/${el}.wc.js`"
-      defer
-    ></script>
   </div>
 </template>
 
@@ -25,7 +17,6 @@ import { parse } from "marked";
   name: "Editor",
 })
 export default class Editor extends Vue {
-  elements = ["kubernetes", "vm", "deployedlist", "caprover"];
   md = `
 # h1
 ## h2
@@ -43,10 +34,6 @@ export default class Editor extends Vue {
   
   `;
   html = "";
-
-  created() {
-    console.log(this.elements);
-  }
 
   @Watch("md", { immediate: true, deep: true })
   onMdChange() {
