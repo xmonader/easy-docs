@@ -1,16 +1,43 @@
 <template>
   <section class="viewer">
-    works - {{ $store.getters.activeRoute }} - {{ $store.getters.activePage }}
+    <!-- works - {{ $store.getters.activeRoute }} - {{ $store.getters.activePage }} -->
+    <p v-if="loading">Loading...</p>
+    <div v-if="!loading" v-html="html" />
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
+import api from "@/utils/api";
+import { parse } from "marked";
+import fm from "front-matter";
 
 @Component({
   name: "MDViewer",
 })
-export default class MDViewer extends Vue {}
+export default class MDViewer extends Vue {
+  html = "";
+  loading = true;
+
+  get path(): string {
+    return this.$store.getters.activePage;
+  }
+
+  @Watch("path", { immediate: true })
+  onPathChange(path: string) {
+    api
+      .get(path)
+      .then(({ data }) => {
+        const { attributes, body } = fm(data);
+        document.title = (attributes as any).title;
+        this.html = parse(body, {
+          sanitize: false,
+        });
+      })
+      .catch(console.log)
+      .finally(() => (this.loading = false));
+  }
+}
 </script>
 
 <style lang="scss" scoped>

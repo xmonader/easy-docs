@@ -4,3 +4,7 @@ html,
 body {
   overflow: hidden !important;
 }
+
+h1 {
+  font-size: 40px;
+}
