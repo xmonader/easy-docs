@@ -25,6 +25,7 @@ export default class MDViewer extends Vue {
 
   @Watch("path", { immediate: true })
   onPathChange(path: string) {
+    this.loading = true;
     api
       .get(path)
       .then(({ data }) => {
