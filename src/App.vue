@@ -36,10 +36,10 @@ export default class App extends Vue {
   sidenav: ISidenav | null = null;
 
   created() {
-    api
-      .get<ISidenav>("/sidenav.json")
-      .then((r) => (this.sidenav = r.data))
-      .catch(console.log);
+    // api
+    //   .get<ISidenav>("/sidenav.json")
+    //   .then((r) => (this.sidenav = r.data))
+    //   .catch(console.log);
   }
 
   @Watch("$route", { immediate: true, deep: true })
