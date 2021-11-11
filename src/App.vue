@@ -8,12 +8,12 @@
       defer
     ></script>
 
-    <section class="app-container" v-if="sidenav">
+    <!-- <section class="app-container" v-if="sidenav">
       <Sidenav :routes="sidenav" :activeRoute="$store.getters.activeRoute" />
-      <router-view />
-    </section>
+    </section> -->
+    <router-view />
 
-    <p v-if="!sidenav">Loading...</p>
+    <!-- <p v-if="!sidenav">Loading...</p> -->
   </main>
 </template>
 
